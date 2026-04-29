@@ -21,7 +21,7 @@ import PackageDescription
 
 let package = Package(
     name: "TTSignal",
-    platforms: [.iOS(.v14)],
+    platforms: [.iOS(.v13)],
     products: [
         .library(name: "TTSignal", targets: ["TTSignal"]),
     ],
@@ -29,7 +29,7 @@ let package = Package(
         .binaryTarget(
             name: "TTSignalCore",
             url: "https://github.com/3th1UOYgUtJkurSZ/ttsignal-xcframework/releases/download/1.0.20260429/ttsignal-swift.zip",
-            checksum: "8def02451b831dbca44e5cc1e94f6723d910eb742a7a973715d1ae09b29c7e38"
+            checksum: "8e3868e4abc6ed74f7045cdf0ebebe64c8c1b0950ed1186a9f72e5056847f8b0"
         ),
         .target(
             name: "TTSignal",

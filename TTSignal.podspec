@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'Proprietary', :file => 'LICENSE' }
   s.author           = { 'TTSignal' => 'noreply@chative.im' }
 
-  s.platform         = :ios, '14.0'
+  s.platform         = :ios, '13.0'
   s.swift_versions   = ['5.9']
 
   s.source = {
@@ -44,7 +44,7 @@ Pod::Spec.new do |s|
     set -e
     ZIP="ttsignal-swift.zip"
     URL="https://github.com/3th1UOYgUtJkurSZ/ttsignal-xcframework/releases/download/1.0.20260429/ttsignal-swift.zip"
-    EXPECTED_SHA256="8def02451b831dbca44e5cc1e94f6723d910eb742a7a973715d1ae09b29c7e38"
+    EXPECTED_SHA256="8e3868e4abc6ed74f7045cdf0ebebe64c8c1b0950ed1186a9f72e5056847f8b0"
     /usr/bin/curl -fL "${URL}" -o "${ZIP}"
     ACTUAL_SHA256=$(/usr/bin/shasum -a 256 "${ZIP}" | awk '{print $1}')
     if [ "${ACTUAL_SHA256}" != "${EXPECTED_SHA256}" ]; then

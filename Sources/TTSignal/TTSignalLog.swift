@@ -41,31 +41,20 @@ private final class SinkBox {
     init(sink: @escaping TTSignalLog.LogSink) { self.sink = sink }
 }
 
-/// Map a BCLog level (the integer the C bridge passes to TTLogCallback,
-/// deps/env/src/BC/BCLog.h: _FATAL_=0, _ERROR_=1, _WARN_=2, _INFO_=3,
-/// _DEBUG_=4, _FINEST_=6) into the user-facing `TTSignalConfig.LogLevel`
-/// enum (whose raw values are the Const.LOG_* filter numbers, NOT BCLog
-/// levels). Without this map a BC ERROR (1) would be misread as DEBUG (1
-/// in TTSignalConfig.LogLevel), etc.
-private func mapBCLevelToLogLevel(_ bc: Int32) -> TTSignalConfig.LogLevel {
-    switch bc {
-    case 0: return .fatal   // _FATAL_
-    case 1: return .error   // _ERROR_
-    case 2: return .warn    // _WARN_
-    case 3: return .info    // _INFO_
-    case 4: return .debug   // _DEBUG_
-    case 6: return .debug   // _FINEST_  (no separate enum case; treat as debug)
-    default: return .info
-    }
-}
-
+/// The integer the C bridge passes to `TTLogCallback` is already the
+/// public TTSignal log level (Const.LOG_* / Utils.h LOG_LEVEL_*, 1..5),
+/// because `SMPConnector::log_callback` runs `BCLogLevelToLogLevel()`
+/// before invoking `IConnectorHandler::OnLog`. That maps 1:1 onto the
+/// raw values of `TTSignalConfig.LogLevel`, so we just construct it
+/// directly — no remapping needed. Anything outside 1..5 (shouldn't
+/// happen in practice) falls back to `.info`.
 private func log_trampoline(userdata: UnsafeMutableRawPointer?,
                             level: Int32,
                             msg: UnsafePointer<CChar>?)
 {
     guard let userdata = userdata else { return }
     let box = Unmanaged<SinkBox>.fromOpaque(userdata).takeUnretainedValue()
-    let lvl = mapBCLevelToLogLevel(level)
+    let lvl = TTSignalConfig.LogLevel(rawValue: level) ?? .info
     let s = msg.flatMap { String(cString: $0) } ?? ""
     box.sink(lvl, s)
 }

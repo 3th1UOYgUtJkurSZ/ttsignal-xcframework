@@ -12,8 +12,8 @@ a high-performance QUIC signaling SDK built on top of xquic.
 
 | | Value |
 |---|---|
-| Version | `1.0.0.20260429` |
-| xcframework | [`ttsignal-swift.zip`](https://github.com/3th1UOYgUtJkurSZ/ttsignal-release/releases/download/1.0.0.20260429/ttsignal-swift.zip) |
+| Version | `1.0.20260429` |
+| xcframework | [`ttsignal-swift.zip`](https://github.com/3th1UOYgUtJkurSZ/ttsignal-release/releases/download/1.0.20260429/ttsignal-swift.zip) |
 | SPM checksum | `8def02451b831dbca44e5cc1e94f6723d910eb742a7a973715d1ae09b29c7e38` |
 | SHA-256 | `8def02451b831dbca44e5cc1e94f6723d910eb742a7a973715d1ae09b29c7e38` |
 | Min iOS | 14.0 |
@@ -27,13 +27,13 @@ In Xcode → File → Add Packages, paste:
 https://github.com/3th1UOYgUtJkurSZ/ttsignal-release.git
 ```
 
-Pin to the version above (or `from: "1.0.0.20260429"`). Or in
+Pin to the version above (or `from: "1.0.20260429"`). Or in
 `Package.swift`:
 
 ```swift
 .package(
     url: "https://github.com/3th1UOYgUtJkurSZ/ttsignal-release.git",
-    from: "1.0.0.20260429"
+    from: "1.0.20260429"
 )
 ```
 
@@ -55,7 +55,7 @@ the full Swift API mirrors the Java/Android binding one-for-one.
 ## CocoaPods
 
 ```ruby
-pod 'TTSignal', :git => 'https://github.com/3th1UOYgUtJkurSZ/ttsignal-release.git', :tag => '1.0.0.20260429'
+pod 'TTSignal', :git => 'https://github.com/3th1UOYgUtJkurSZ/ttsignal-release.git', :tag => '1.0.20260429'
 ```
 
 `pod install` runs `prepare_command` to fetch the xcframework from the
@@ -75,8 +75,9 @@ matching GitHub Release tag at install time.
 
 ## Versioning
 
-`1.0.0.20260429` follows `1.0.0.YYYYMMDD`, where `YYYYMMDD` is the
-build day of the C++ SDK (mirrors the `__DATE__` macro baked into
+`1.0.20260429` follows `1.0.YYYYMMDD`, where the patch component
+is the build day of the C++ SDK (mirrors the `__DATE__` macro baked into
 `Utils.cpp`). All four platform artifacts produced on the same day —
 iOS xcframework, Linux/macOS Node addons, Windows Node addon — share the
-same release tag.
+same release tag. The 3-segment shape is intentional: SwiftPM and
+CocoaPods both reject 4-segment versions like `1.0.0.YYYYMMDD`.

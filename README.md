@@ -13,7 +13,7 @@ a high-performance QUIC signaling SDK built on top of xquic.
 | | Value |
 |---|---|
 | Version | `1.0.20260429` |
-| xcframework | [`ttsignal-swift.zip`](https://github.com/3th1UOYgUtJkurSZ/ttsignal-release/releases/download/1.0.20260429/ttsignal-swift.zip) |
+| xcframework | [`ttsignal-swift.zip`](https://github.com/3th1UOYgUtJkurSZ/ttsignal-xcframework/releases/download/1.0.20260429/ttsignal-swift.zip) |
 | SPM checksum | `8def02451b831dbca44e5cc1e94f6723d910eb742a7a973715d1ae09b29c7e38` |
 | SHA-256 | `8def02451b831dbca44e5cc1e94f6723d910eb742a7a973715d1ae09b29c7e38` |
 | Min iOS | 14.0 |
@@ -24,7 +24,7 @@ a high-performance QUIC signaling SDK built on top of xquic.
 In Xcode → File → Add Packages, paste:
 
 ```
-https://github.com/3th1UOYgUtJkurSZ/ttsignal-release.git
+https://github.com/3th1UOYgUtJkurSZ/ttsignal-xcframework.git
 ```
 
 Pin to the version above (or `from: "1.0.20260429"`). Or in
@@ -32,7 +32,7 @@ Pin to the version above (or `from: "1.0.20260429"`). Or in
 
 ```swift
 .package(
-    url: "https://github.com/3th1UOYgUtJkurSZ/ttsignal-release.git",
+    url: "https://github.com/3th1UOYgUtJkurSZ/ttsignal-xcframework.git",
     from: "1.0.20260429"
 )
 ```
@@ -43,7 +43,7 @@ then
 .target(
     name: "YourApp",
     dependencies: [
-        .product(name: "TTSignal", package: "ttsignal-release")
+        .product(name: "TTSignal", package: "ttsignal-xcframework")
     ]
 )
 ```
@@ -55,7 +55,7 @@ the full Swift API mirrors the Java/Android binding one-for-one.
 ## CocoaPods
 
 ```ruby
-pod 'TTSignal', :git => 'https://github.com/3th1UOYgUtJkurSZ/ttsignal-release.git', :tag => '1.0.20260429'
+pod 'TTSignal', :git => 'https://github.com/3th1UOYgUtJkurSZ/ttsignal-xcframework.git', :tag => '1.0.20260429'
 ```
 
 `pod install` runs `prepare_command` to fetch the xcframework from the

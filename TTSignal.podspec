@@ -44,7 +44,7 @@ Pod::Spec.new do |s|
     set -e
     ZIP="ttsignal-swift.zip"
     URL="https://github.com/3th1UOYgUtJkurSZ/ttsignal-xcframework/releases/download/1.0.20260429/ttsignal-swift.zip"
-    EXPECTED_SHA256="8e3868e4abc6ed74f7045cdf0ebebe64c8c1b0950ed1186a9f72e5056847f8b0"
+    EXPECTED_SHA256="289ce418122d186b78d8e9c01645794eb8613d3a003e59313e798eb46297e788"
     /usr/bin/curl -fL "${URL}" -o "${ZIP}"
     ACTUAL_SHA256=$(/usr/bin/shasum -a 256 "${ZIP}" | awk '{print $1}')
     if [ "${ACTUAL_SHA256}" != "${EXPECTED_SHA256}" ]; then

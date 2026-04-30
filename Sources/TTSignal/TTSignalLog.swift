@@ -3,10 +3,13 @@
 // author : anto
 //
 // Swift access to the bridge's logger. By default every log line goes to
-// OSLog under subsystem "org.difft.ttsignal" / category "core" — this file
-// only exists for clients that want a callback to surface logs in their UI
-// (e.g. QUICTest). Mirrors the Config.LogHandler functional interface in
-// src/java/.../Config.java.
+// OSLog under subsystem "org.difft.ttsignal" / category "core". Apps that
+// want to surface logs in their own UI (e.g. QUICTest) or pipe them into
+// their own logging stack install a sink via `setSink` — installing a
+// sink also silences the OSLog backend, so the host app owns log
+// delivery exclusively and Console.app doesn't see duplicates of every
+// line. Removing the sink (`setSink(nil)`) restores the OSLog default.
+// Mirrors the Config.LogHandler functional interface in src/java/.../Config.java.
 ///////////////////////////////////////////////////////////////////////////////
 
 import Foundation
@@ -20,9 +23,13 @@ public enum TTSignalLog {
     /// the lifetime of its registration.
     private static var sinkBox: SinkBox?
 
-    /// Install a Swift log sink. Pass nil to remove. The sink may fire
-    /// from any thread — implementers are responsible for thread-hopping
-    /// before touching UI.
+    /// Install a Swift log sink. Pass `nil` to remove and restore the
+    /// default OSLog backend. While a sink is installed the bridge sends
+    /// log lines **only** to the sink — the OSLog forwarder is silenced,
+    /// so the host app owns log delivery and Console.app no longer sees
+    /// duplicates of every line you're already rendering / persisting.
+    /// The sink may fire from any thread — implementers are responsible
+    /// for thread-hopping before touching UI.
     public static func setSink(_ sink: LogSink?) {
         if let sink {
             let box = SinkBox(sink: sink)

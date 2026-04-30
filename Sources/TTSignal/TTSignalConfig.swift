@@ -60,6 +60,16 @@ public struct TTSignalConfig {
     public var serverHost: String              = ""
     public var caCertPem: String               = ""
 
+    /// Off-switch for the bridge's built-in auto-restart on path
+    /// changes. `false` (default) leaves AppleNetworkMonitor wired up
+    /// to SMPConnection::Restart, so cellular ↔ wifi handoffs migrate
+    /// the QUIC connection without app code lifting a finger. Set to
+    /// `true` for server / long-lived deployments (mirrors the
+    /// NAPI `config.disableAutoRestart`) where you'd rather opt out
+    /// of NWPathMonitor jitter altogether and trigger restarts
+    /// yourself via `TTSignalConnection.restart(interface:)`.
+    public var disableAutoRestart: Bool        = false
+
     public init() {}
 
     /// Build a TTConfig POD with C-string-backed fields. The closure runs
@@ -101,6 +111,7 @@ public struct TTSignalConfig {
         c.numOfSenders             = numOfSenders
         c.serverHost               = cstr(serverHost)
         c.caCertPem                = cstr(caCertPem)
+        c.disableAutoRestart       = disableAutoRestart ? 1 : 0
 
         return withUnsafePointer(to: &c) { body($0) }
     }

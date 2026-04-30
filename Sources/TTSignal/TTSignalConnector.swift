@@ -64,6 +64,29 @@ public final class TTSignalConnector {
         // Connector.java's two-phase close + finalize.
     }
 
+    /// Synchronous shutdown: kicks `tt_connector_close` and blocks the
+    /// caller until the C++ engine has fired `IConnectorHandler::OnClosed`
+    /// (i.e. xqc_engine_destroy + log appender removal are done) or
+    /// `timeoutMs` elapses. Returns `true` on a clean close, `false` on
+    /// timeout.
+    ///
+    /// Prefer this over `close()` whenever the next thing you do is
+    /// drop the wrapper (so `deinit` calls `tt_connector_destroy`) or
+    /// rebuild a new connector — for example, the QUICTest log-level
+    /// switcher does both. The plain async `close()` otherwise races
+    /// the destroy and can crash worker threads still touching the
+    /// underlying SMPConnector.
+    ///
+    /// `timeoutMs <= 0` waits forever. MUST NOT be called from inside a
+    /// `TTSignalHandler` callback (would deadlock the same worker pool
+    /// that has to deliver the close notification).
+    @discardableResult
+    public func closeSync(timeoutMs: Int32 = 3000) -> Bool {
+        guard let h = handle else { return true }
+        // BC_R_SUCCESS == 0 (see deps/env/src/BC/Config.h).
+        return tt_connector_close_sync(h, timeoutMs) == 0
+    }
+
     // Internal — used by TTSignalConnection.init.
     var rawHandle: TTConnectorRef? { handle }
 }

@@ -14,8 +14,8 @@ a high-performance QUIC signaling SDK built on top of xquic.
 |---|---|
 | Version | `1.0.20260430` |
 | xcframework | [`ttsignal-swift.zip`](https://github.com/3th1UOYgUtJkurSZ/ttsignal-xcframework/releases/download/1.0.20260430/ttsignal-swift.zip) |
-| SPM checksum | `7e63416cb7aa3d1280222bbfda997bde05c8313d50157024df448cbf974ac8e3` |
-| SHA-256 | `7e63416cb7aa3d1280222bbfda997bde05c8313d50157024df448cbf974ac8e3` |
+| SPM checksum | `62cd97d771873fe6bb1276568938a931d316bdf5f8a6af6cad04f178f71dbae5` |
+| SHA-256 | `62cd97d771873fe6bb1276568938a931d316bdf5f8a6af6cad04f178f71dbae5` |
 | Min iOS | 13.0 |
 | Architectures | `ios-arm64`, `ios-arm64_x86_64-simulator` |
 

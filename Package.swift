@@ -28,8 +28,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "TTSignalCore",
-            url: "https://github.com/3th1UOYgUtJkurSZ/ttsignal-xcframework/releases/download/1.0.20260508/ttsignal-swift.zip",
-            checksum: "e5cd03db36ab4f973426fea603637abe85b42fb6db00083985fcfeb04f722a4c"
+            url: "https://github.com/3th1UOYgUtJkurSZ/ttsignal-xcframework/releases/download/1.0.20260508-1/ttsignal-swift.zip",
+            checksum: "8a69bd806c344c3830b45947a7dc9a49aa71047ad440a379f943a89b81ece5ff"
         ),
         .target(
             name: "TTSignal",

@@ -70,6 +70,18 @@ public struct TTSignalConfig {
     /// yourself via `TTSignalConnection.restart(interface:)`.
     public var disableAutoRestart: Bool        = false
 
+    /// macOS-only behaviour switch. Default (`nil`) keeps the
+    /// platform-native default — currently "prefer physical
+    /// interfaces" — which avoids bouncing QUIC onto a VPN/utun
+    /// tunnel while the underlying wifi is in the middle of a
+    /// handover. Set to `false` to let macOS pick whatever the
+    /// active default-route interface is (including VPN tunnels);
+    /// set to `true` to force the same physical-first behaviour
+    /// explicitly. iOS honours the property for API parity but
+    /// always uses the OS preference order, so the value is a no-op
+    /// on iPhone / iPad.
+    public var bypassVpn: Bool?                = nil
+
     public init() {}
 
     /// Build a TTConfig POD with C-string-backed fields. The closure runs
@@ -112,6 +124,10 @@ public struct TTSignalConfig {
         c.serverHost               = cstr(serverHost)
         c.caCertPem                = cstr(caCertPem)
         c.disableAutoRestart       = disableAutoRestart ? 1 : 0
+        // -1 sentinel = "use platform default" (see TTConfig.bypassVpn
+        // doc in ios_bridge.h). Only flip to 0/1 when the app has
+        // actually expressed a preference.
+        c.bypassVpn                = bypassVpn.map { $0 ? Int32(1) : Int32(0) } ?? Int32(-1)
 
         return withUnsafePointer(to: &c) { body($0) }
     }

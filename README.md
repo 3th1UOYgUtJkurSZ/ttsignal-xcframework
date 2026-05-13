@@ -12,10 +12,10 @@ a high-performance QUIC signaling SDK built on top of xquic.
 
 | | Value |
 |---|---|
-| Version | `1.0.20260512-1` |
-| xcframework | [`ttsignal-swift.zip`](https://github.com/3th1UOYgUtJkurSZ/ttsignal-xcframework/releases/download/1.0.20260512-1/ttsignal-swift.zip) |
-| SPM checksum | `60b7a32e78e5fb68d17da1b07ebf7d6d8be90756a2818bb766a07b66ca79f90e` |
-| SHA-256 | `60b7a32e78e5fb68d17da1b07ebf7d6d8be90756a2818bb766a07b66ca79f90e` |
+| Version | `1.0.20260513` |
+| xcframework | [`ttsignal-swift.zip`](https://github.com/3th1UOYgUtJkurSZ/ttsignal-xcframework/releases/download/1.0.20260513/ttsignal-swift.zip) |
+| SPM checksum | `13cbd41d6537e4aae4744d716125574ce521e2a8e20f38ed6f1625d5d559f46d` |
+| SHA-256 | `13cbd41d6537e4aae4744d716125574ce521e2a8e20f38ed6f1625d5d559f46d` |
 | Min iOS | 13.0 |
 | Architectures | `ios-arm64`, `ios-arm64_x86_64-simulator` |
 
@@ -27,13 +27,13 @@ In Xcode → File → Add Packages, paste:
 https://github.com/3th1UOYgUtJkurSZ/ttsignal-xcframework.git
 ```
 
-Pin to the version above (or `from: "1.0.20260512-1"`). Or in
+Pin to the version above (or `from: "1.0.20260513"`). Or in
 `Package.swift`:
 
 ```swift
 .package(
     url: "https://github.com/3th1UOYgUtJkurSZ/ttsignal-xcframework.git",
-    from: "1.0.20260512-1"
+    from: "1.0.20260513"
 )
 ```
 
@@ -55,7 +55,7 @@ the full Swift API mirrors the Java/Android binding one-for-one.
 ## CocoaPods
 
 ```ruby
-pod 'TTSignal', :git => 'https://github.com/3th1UOYgUtJkurSZ/ttsignal-xcframework.git', :tag => '1.0.20260512-1'
+pod 'TTSignal', :git => 'https://github.com/3th1UOYgUtJkurSZ/ttsignal-xcframework.git', :tag => '1.0.20260513'
 ```
 
 `pod install` runs `prepare_command` to fetch the xcframework from the
@@ -75,7 +75,7 @@ matching GitHub Release tag at install time.
 
 ## Versioning
 
-`1.0.20260512-1` follows `1.0.YYYYMMDD`, where the patch component
+`1.0.20260513` follows `1.0.YYYYMMDD`, where the patch component
 is the build day of the C++ SDK (mirrors the `__DATE__` macro baked into
 `Utils.cpp`). All four platform artifacts produced on the same day —
 iOS xcframework, Linux/macOS Node addons, Windows Node addon — share the

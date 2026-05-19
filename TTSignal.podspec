@@ -11,7 +11,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TTSignal'
-  s.version          = '1.0.20260513-1'
+  s.version          = '1.0.20260519'
   s.summary          = 'High-performance QUIC signaling SDK (xquic + Swift)'
   s.description      = <<-DESC
     TTSignal is a QUIC-based signaling library used as a WebSocket
@@ -43,8 +43,8 @@ Pod::Spec.new do |s|
   s.prepare_command = <<-CMD
     set -e
     ZIP="ttsignal-swift.zip"
-    URL="https://github.com/3th1UOYgUtJkurSZ/ttsignal-xcframework/releases/download/1.0.20260513-1/ttsignal-swift.zip"
-    EXPECTED_SHA256="053538cdc4d41bb3a21eb1ff91db28de58cd9e1106e737858a46b9648fb17e6f"
+    URL="https://github.com/3th1UOYgUtJkurSZ/ttsignal-xcframework/releases/download/1.0.20260519/ttsignal-swift.zip"
+    EXPECTED_SHA256="f2a4ed9beb4d0f1a415f32a017b4d32e899fc1d515a2e39d2e1415b2ad013bf0"
     /usr/bin/curl -fL "${URL}" -o "${ZIP}"
     ACTUAL_SHA256=$(/usr/bin/shasum -a 256 "${ZIP}" | awk '{print $1}')
     if [ "${ACTUAL_SHA256}" != "${EXPECTED_SHA256}" ]; then
